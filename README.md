@@ -1,5 +1,5 @@
 # PhysicalDesign_using_OpenLane_Sky130
-Advanced Physical Design project - A complete RTL to GDSII flow was carried out on Picorv32 SoC using OpenLane SkyWater-130nm Pdk, as part of the course "Advanced Physical Design using OpenLANE/Sky130" conducted by VLSI System Design Corporation.
+Advanced Physical Design project - A complete P&R flow was carried out on Picorv32 SoC using OpenLane SkyWater-130nm Pdk on riscV, as part of the course "Advanced Physical Design using OpenLANE/Sky130" conducted by VLSI System Design Corporation.
 # Contents
 1. Introduction to RTL to GDS flow
 2. OpenLane Introductio

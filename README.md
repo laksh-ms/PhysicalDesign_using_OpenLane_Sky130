@@ -228,6 +228,19 @@ Copy the extracted LEF file from layout into designs\picorv32a\src directory alo
 
 
 
+- Mmodify design\picorv32a\config.tcl
+
+
+- Now perform openLANE design flow
+
+% package require openLANE 0.9
+% prep -design picorv32a -tag 12-08_20-54 -overwrite
+% set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+% add_lefs -src $lefs
+% run_synthesis
+% run_floorplan
+% run_placement
+
 
 
   

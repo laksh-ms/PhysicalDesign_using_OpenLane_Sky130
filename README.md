@@ -172,6 +172,16 @@ To plot transient analysis output, where y - output node and a - input node
 plot y vs time a
 ```
 
+=== Inverter Standard cell characterization
+Four timing parameters are used to characterize the inverter standard cell:
+
+Rise transition: Time taken for the output to rise from 20% of max value to 80% of max value
+Fall transition- Time taken for the output to fall from 80% of max value to 20% of max value
+Cell rise delay = time(50% output rise) - time(50% input fall)
+Cell fall delay = time(50% output fall) - time(50% input rise)
+The above timing parameters can be computed by noting down various values from the ngspice waveform.
+
+
 
 
 

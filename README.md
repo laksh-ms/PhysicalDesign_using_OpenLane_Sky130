@@ -1,13 +1,19 @@
 # PhysicalDesign_using_OpenLane_Sky130
 Advanced Physical Design project - A complete P&R flow was carried out on Picorv32 SoC using OpenLane SkyWater-130nm Pdk on riscV, as part of the course "Advanced Physical Design using OpenLANE/Sky130" conducted by VLSI System Design Corporation. PicoRV32 is a CPU core that implements the RISC-V RV32IMC Instruction Set which is used as an example in this course.
 
+# Author
+
 # Contents
-1. Introduction to OpenLane
-2. OpenLane-invoking and Design Preparation
-3. Synthesis
-4. Floorplaning
-5. Placement
-6. Std. Cell Design
+1. [Introduction to OpenLane](#introduction-to-OpenLane)
+2. [OpenLane-invoking and Design Preparation](#invoking-openlane-and-Design-Preparation)
+3. [Synthesis](#synthesis)
+4. [Floorplaning](#floorplaning)
+5. [Placement](#placement)
+6. [Std. Cell Design](#standard-cell-design)
+7. [Timing analysis and Clock tree synthesis](#timing-analysis-and-clock-design)
+8. [Final steps in RTL to GDSII](#final-steps-in-rtl-to-gdsii)
+9. [Conclusion](#conclusion)
+10. [Acknowledgements](#acknowledgements)
 
 
 # Introduction to OpenLane
@@ -50,7 +56,7 @@ OpenLane flow consists of several stages. By default all flow steps are run in s
 
 # Invoking OpenLANE and Design Preparation
 
-  ![Invoking_Openlane](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/643b2588-3d0e-4d05-bc12-1dcef19ea74c)
+![Invoking_Openlane](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/643b2588-3d0e-4d05-bc12-1dcef19ea74c)
 
 Preparation step basically sets up the directory structure, merges the technology LEF (.tlef) and cell LEF(.lef) into one. Tech LEF contains the layer informations and cell LEF contains the cell informations. All the designs are placed under the designs directory for openLANE flow. 
 Directory structure of picrorv32a before and after executing prep command.
@@ -69,10 +75,10 @@ To synthesize the design
 % run_synthesis
 ```
   - Running Synthesis
-  ![RunningSynthesis](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/2d66c092-2e9a-40a5-97e1-7047fc8a2ae0)
+![RunningSynthesis](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/2d66c092-2e9a-40a5-97e1-7047fc8a2ae0)
 
   -Calculating Flip Flop ratio
-  ![No_of_flip-flops](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/7d8633c4-076d-4a9b-8b0f-ad1912e25056)
+![No_of_flip-flops](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/7d8633c4-076d-4a9b-8b0f-ad1912e25056)
 
 dfxtp_2 = 1613,
 Number of cells = 14876,
@@ -90,7 +96,8 @@ To run floorplanning phase
 % run_floorplan
 ```
   - Running Floorplan
-    
+![Floorplan_successful](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/ec6cf76d-e4fa-4e1d-9b63-f45a68241593)
+
 
 Floor planning phase generate DEF file which contains core area and placement details of standard cells.
 
@@ -99,6 +106,10 @@ Floor planning phase generate DEF file which contains core area and placement de
     * Magic technology file (sky130A.tech)
     * DEF file from floorplan phase
     * Merged LEF file from preparation phase
+![Screenshot from 2023-08-13 02-31-32](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/84e719f2-5fe4-4491-970e-6c3887719c69)
+
+
+![Screenshot from 2023-08-13 02-32-48](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/c2c26bfa-32dd-4df8-ae4a-cc6e5c0aecd0)
 
 
 # Placement
@@ -116,11 +127,11 @@ To run placement phase
 ```
 % run_placement
 ```
-  - Running Placement
+  - Running Placement in Magic   
+![Screenshot from 2023-08-13 03-14-00](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/33a0722d-31e9-48f4-94cf-f6e6538ac025)
 
+![Screenshot from 2023-08-13 03-14-22](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/981921f8-563f-44c9-8a79-e5891e521792)
 
-  - To see Floorplan in Magic   
-    
 
 # Standard Cell Design
 
@@ -146,33 +157,28 @@ Apply the entire flow to GUNA tool to generate timing, noise and power models.
 
 === Design and characterize library cell CMOS inverter
 
-Magic layout view to cmos inverter::
+- Magic layout view to cmos inverter::
 To get the cell files refer https://github.com/nickson-jose/vsdstdcelldesign[`standard cell characterization`]
 
-Magic layout view to cmos inverter:
+- Magic layout view to cmos inverter:
+![Screenshot from 2023-08-13 03-28-09](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/0699795b-b7c6-4e70-b63c-3a3409d65b6f)
+
+- To extract the parasitics and characterize the cell design use below commands in tkcon window:
+![Screenshot from 2023-08-13 03-37-58](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/c6b86088-6c21-499a-98ff-7693ed08e487)
+
+- Extracted spice deck file from the layout:
+![Screenshot from 2023-08-13 03-39-52](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/38914095-2a72-47a5-8c6d-b3c52a5baeea)
+
+- Few modifications needs to be done in spice deck file and then run the simulation in ngspice,
+    * invoke the ngspice tool with the modified extracted spice file as input.
+    * To plot transient analysis output, where y - output node and a - input node
+      ```
+      plot y vs time a
+      ```
+![Screenshot from 2023-08-13 08-15-28](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/48a3ac65-bb46-413f-a270-0bb947d9f96c)
 
 
-
-To extract the parasitics and characterize the cell design use below commands in tkcon window:
-
-
-Extracted spice deck file from the layout:
-
-
-
-Few modifications needs to be done in spice deck file:
-
-
-To run the simulation in ngspice, invoke the ngspice tool with the modified extracted spice file as input:
-
-
-
-To plot transient analysis output, where y - output node and a - input node
-```
-plot y vs time a
-```
-
-=== Inverter Standard cell characterization
+- Inverter Standard cell characterization
 Four timing parameters are used to characterize the inverter standard cell:
 
 Rise transition: Time taken for the output to rise from 20% of max value to 80% of max value
@@ -181,8 +187,20 @@ Cell rise delay = time(50% output rise) - time(50% input fall)
 Cell fall delay = time(50% output fall) - time(50% input rise)
 The above timing parameters can be computed by noting down various values from the ngspice waveform.
 
+![Screenshot from 2023-08-13 08-23-00](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/1b9678d1-6c7c-40ed-be0f-b100cb15e590)
+![Screenshot from 2023-08-13 08-27-10](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/4b1ab738-294b-4c26-8f5a-ee2b1c3e5d93)
 
 
+
+
+
+
+## Acknowledgements 
+
+- [The OpenROAD Project](https://github.com/The-OpenROAD-Project/OpenLane)
+- [Nickson Jose](https://github.com/nickson-jose/vsdstdcelldesign)
+- [Kunal Ghosh](https://github.com/kunalg123)
+  
 
 
 

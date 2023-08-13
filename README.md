@@ -232,9 +232,9 @@ Copy the extracted LEF file from layout into designs\picorv32a\src directory alo
 ![Screenshot from 2023-08-13 10-50-16](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/de75d437-7eb7-4f04-9cec-195631e3ae53)
 
 
-- Mmodify design\picorv32a\config.tcl
+- Modify design\picorv32a\config.tcl
 
-![Screenshot from 2023-08-13 11-16-51](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/78a64928-97e5-4200-ac91-e1de39f30186)
+
 
 
 - Now perform openLANE design flow

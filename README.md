@@ -98,7 +98,6 @@ To run floorplanning phase
   - Running Floorplan
 ![Floorplan_successful](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/ec6cf76d-e4fa-4e1d-9b63-f45a68241593)
 
-
 Floor planning phase generate DEF file which contains core area and placement details of standard cells.
 
    - To see Floorplan in Magic   
@@ -116,12 +115,9 @@ Floor planning phase generate DEF file which contains core area and placement de
 
 Placement determine the locations of standard cells or logic elements within each block.Some circuit elements may have fixed locations while others are movable.
 
-Global placement:
-Global placement assigns general locations to movable objects. Some overlaps are allowed between placed objects.
+  * Global placement: Global placement assigns general locations to movable objects. Some overlaps are allowed between placed objects.
 
-Detailed placement:
-Detailed placement refines object locations to legal cell sites and enforces non-overlapping constraints.
-Detailed placement determines the achievable quality of the subsequent routing stages.
+  * Detailed placement: Detailed placement refines object locations to legal cell sites and enforces non-overlapping constraints. Detailed placement determines the achievable quality of the subsequent routing stages.
 
 To run placement phase
 ```
@@ -136,29 +132,28 @@ To run placement phase
 # Standard Cell Design
 
 Standard cell design flow consists of 3 stages
-* Inputs: PDKs, DRC and LVS rules, SPICE models, library & user-defined specs.
-* Design Steps:  Involves circuit design, layout design, characterization using GUNA tool. Characterization involves timing, power and noise characterizations.
-*Outputs:  CDL (Circuit Description Language), GDSII, LEF(Library Exchange Format), Spice extracted netlist, timing, noise, power libs.
+  * Inputs: PDKs, DRC and LVS rules, SPICE models, library & user-defined specs.
+  * Design Steps:  Involves circuit design, layout design, characterization using GUNA tool. Characterization involves timing, power and noise characterizations.
+  * Outputs:  CDL (Circuit Description Language), GDSII, LEF(Library Exchange Format), Spice extracted netlist, timing, noise, power libs.
 
 
 Standard cell characterization refers to gathering data about the behaviour of standard cells. To build the circuit knowledge of logic function of cell alone is not sufficient.
-Standard cell library has cells with different drive strength and functionalities.These cells are characterized by using tool like GUNA from https://www.paripath.com/home[`Paripath`].
+Standard cell library has cells with different drive strength and functionalities.These cells are characterized by using tool like GUNA from [`Paripath`](#https://www.paripath.com/home).
 
 The standard cell characterization flow involves
 
-* Read the model files
-* Read the extracted spice netlist
-* Recognize function or behaviour of the cell
-* Apply stimulus and characterization setup
-* Vary the output load capacitance and observe the different characterization behaviours
-* Provide necessary simulation commands
-
+  * Read the model files
+  * Read the extracted spice netlist
+  * Recognize function or behaviour of the cell
+  * Apply stimulus and characterization setup
+  * Vary the output load capacitance and observe the different characterization behaviours
+  * Provide necessary simulation commands
+    
 Apply the entire flow to GUNA tool to generate timing, noise and power models.
 
-=== Design and characterize library cell CMOS inverter
-
-- Magic layout view to cmos inverter::
-To get the cell files refer https://github.com/nickson-jose/vsdstdcelldesign[`standard cell characterization`]
+# Design and characterize library cell CMOS inverter
+  
+To get the cell files refer [`standard cell characterization`](#https://github.com/nickson-jose/vsdstdcelldesign).
 
 - Magic layout view to cmos inverter:
 ![Screenshot from 2023-08-13 03-28-09](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/0699795b-b7c6-4e70-b63c-3a3409d65b6f)
@@ -181,10 +176,11 @@ To get the cell files refer https://github.com/nickson-jose/vsdstdcelldesign[`st
 - Inverter Standard cell characterization
 Four timing parameters are used to characterize the inverter standard cell:
 
-Rise transition: Time taken for the output to rise from 20% of max value to 80% of max value
-Fall transition- Time taken for the output to fall from 80% of max value to 20% of max value
-Cell rise delay = time(50% output rise) - time(50% input fall)
-Cell fall delay = time(50% output fall) - time(50% input rise)
+  * Rise transition: Time taken for the output to rise from 20% of max value to 80% of max value
+  * Fall transition: Time taken for the output to fall from 80% of max value to 20% of max value
+  * Cell rise delay = time(50% output rise) - time(50% input fall)
+  * Cell fall delay = time(50% output fall) - time(50% input rise)
+    
 The above timing parameters can be computed by noting down various values from the ngspice waveform.
 
 ![Screenshot from 2023-08-13 08-23-00](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/1b9678d1-6c7c-40ed-be0f-b100cb15e590)

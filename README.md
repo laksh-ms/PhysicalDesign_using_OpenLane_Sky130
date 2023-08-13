@@ -21,46 +21,27 @@ A diagram showing the general stages of the OpenLane flow as a series of blocks
 
 # OpenLane Design Stages
 OpenLane flow consists of several stages. By default all flow steps are run in sequence. Each stage may consist of multiple sub-stages. OpenLane can also be run interactively as shown here.
-
   - Synthesis
       * yosys/abc - Perform RTL synthesis and technology mapping.
-
-OpenSTA - Performs static timing analysis on the resulting netlist to generate timing reports
-
+      * OpenSTA - Performs static timing analysis on the resulting netlist to generate timing reports
   - Floorplaning
-
-init_fp - Defines the core area for the macro as well as the rows (used for placement) and the tracks (used for routing)
-
-ioplacer - Places the macro input and output ports
-
-pdngen - Generates the power distribution network
-
-tapcell - Inserts welltap and decap cells in the floorplan
-
+      * init_fp - Defines the core area for the macro as well as the rows (used for placement) and the tracks (used for routing)
+      * ioplacer - Places the macro input and output ports
+      * pdngen - Generates the power distribution network
+      * tapcell - Inserts welltap and decap cells in the floorplan
   - Placement
-
-RePLace - Performs global placement
-
-Resizer - Performs optional optimizations on the design
-
-OpenDP - Performs detailed placement to legalize the globally placed components
-
+      * RePLace - Performs global placement
+      * Resizer - Performs optional optimizations on the design
+      * OpenDP - Performs detailed placement to legalize the globally placed components
   - CTS
-
-TritonCTS - Synthesizes the clock distribution network (the clock tree)
-
+      * TritonCTS - Synthesizes the clock distribution network (the clock tree)
   - Routing
-      * FastRoute - Performs global routing to generate a guide file for the detailed router
-
-TritonRoute - Performs detailed routing
-
-OpenRCX - Performs SPEF extraction
-
+      * FastRoute - Performs global routing to generate a guide file for the detailed route
+      * TritonRoute - Performs detailed routing
+      * OpenRCX - Performs SPEF extraction
   - Tapeout
       * Magic - Streams out the final GDSII layout file from the routed def
-
-KLayout - Streams out the final GDSII layout file from the routed def as a back-up
-
+      * KLayout - Streams out the final GDSII layout file from the routed def as a back-up
   - Signoff
       * Magic - Performs DRC Checks & Antenna Checks
       * KLayout - Performs DRC Checks

@@ -194,14 +194,60 @@ The above timing parameters can be computed by noting down various values from t
 
 # Timing analysis and Clock tree synthesis
 
+- Covert grid to tracks of the std. cell:
+  
+Tracks are used in routing stages. Routes are metal traces which can go over the tracks. The information of horizontal and vertical tracks present in each layer is given in tracks.info file.
+
+To ensure that ports lie on the intersection point, the grid spacing in Magic (tkcon) must be changed to the li1 X and li1 Y values. Convergence of grid and tracks can be achieved using the following command:
+
+grid 0.46um 0.34um 0.23um 0.17um
+
+When extracting LEF file, these ports are what are defined as pins of the macro. These are done in magic tool by adding text with enabling port.
+
+
+
+
+- Convert Magic Layout to LEF:
+  
+  Replacing Lef file of the custom designed inverter into picorv32a design. LEF exposes only the necessary things need for the PnR tool and protecting the logic or intellectual property.
+
+  A and Y is attached to locali layer and Vdd and Gnd attached to metal1 layer. To set port class and port attribute refer standard cell characterization. Saved it as sky130_invsd.mag
+
+To extact LEF file as sky130_invsd.lef
+```
+lef write
+```
+
+
+
+- Custom inverter in picorv32a
+
+  o include the custom inverter cell into the openLANE flow
+
+Copy the extracted LEF file from layout into designs\picorv32a\src directory along with sky130_fd_sc_hd_*.lib from the reference repository. Custom cell inverter characterization information is included in above mentioned libs.
+
+
+
+
+
+  
 
 
 # Final steps in RTL to GDSII
+
+- PDN
+  
+- Routing
+  
+- SPEF extraction
+
+- GDS II
 
 
 
 # Conclusion
 
+`gds` file was be generated at location $OPENLANE_ROOT/designs/picorv32a/runs/08-12_20-54/results/magic/picorv32a.gds
 
 
 

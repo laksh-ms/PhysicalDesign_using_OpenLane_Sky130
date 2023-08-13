@@ -1,9 +1,14 @@
 # PhysicalDesign_using_OpenLane_Sky130
+
 Advanced Physical Design project - A complete P&R flow was carried out on Picorv32 SoC using OpenLane SkyWater-130nm Pdk on riscV, as part of the course "Advanced Physical Design using OpenLANE/Sky130" conducted by VLSI System Design Corporation. PicoRV32 is a CPU core that implements the RISC-V RV32IMC Instruction Set which is used as an example in this course.
 
 # Author
 
+_Lakshmi M Satyananda_, M.Tech VLSI Design, Amrita Vishwa Vidyapeetham
+
+
 # Contents
+
 1. [Introduction to OpenLane](#introduction-to-openlane)
 2. [OpenLane-invoking and Design Preparation](#invoking-openlane-and-design-preparation)
 3. [Synthesis](#synthesis)

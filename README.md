@@ -50,3 +50,51 @@ OpenLane flow consists of several stages. By default all flow steps are run in s
 
 # Invoking OpenLANE and Design Preparation
 
+  ![Invoking_Openlane](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/643b2588-3d0e-4d05-bc12-1dcef19ea74c)
+
+Preparation step basically sets up the directory structure, merges the technology LEF (.tlef) and cell LEF(.lef) into one. Tech LEF contains the layer informations and cell LEF contains the cell informations. All the designs are placed under the designs directory for openLANE flow. Directory structure of picrorv32a before and after executing prep command.
+
+[horizontal]
+`*src*`:: contains verilog files and constraints file
+`*config.tcl*`:: contains the configurations used by openLANE
+
+There are three configuration files:
+
+* Each phase used in the process flow has a configuration tcl file under openlane_working_dir/openlane/configuration/<phase_name>.tcl
+* Each design will have its own config.tcl file
+* Each design will have its own pdk specific tcl file, sky130A_sky130_fd_sc_hd_config.tcl which has the highest precedence.
+
+# Synthesis
+To synthesize the design
+```
+% run_synthesis
+```
+  - Running Synthesis
+  ![RunningSynthesis](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/2d66c092-2e9a-40a5-97e1-7047fc8a2ae0)
+
+  -Calculating Flip Flop ratio
+  ![No_of_flip-flops](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/7d8633c4-076d-4a9b-8b0f-ad1912e25056)
+
+dfxtp_2 = 1613,
+Number of cells = 14876,
+Flop ratio = 1613/14876 = 0.1084 = 10.84%
+
+Synthesis logs and report will be captured under runs directory.
+All the configuration parameters related to synthesis phase are available in synthesis.tcl
+
+# Floorplaning
+
+Floorplanning phase deals with setting die area, core area, core utilization factor, aspect ratio, placing of macros, decoupling capacitors, power distribution networks and placement of IO pins.
+
+To run floorplanning phase
+```
+% run_floorplan
+```
+  - Running Floorplan
+    
+
+
+    
+    
+
+

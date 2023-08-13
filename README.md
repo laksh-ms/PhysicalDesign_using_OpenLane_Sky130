@@ -4,8 +4,8 @@ Advanced Physical Design project - A complete P&R flow was carried out on Picorv
 # Author
 
 # Contents
-1. [Introduction to OpenLane](#introduction-to-OpenLane)
-2. [OpenLane-invoking and Design Preparation](#invoking-openlane-and-Design-Preparation)
+1. [Introduction to OpenLane](#introduction-to-openlane)
+2. [OpenLane-invoking and Design Preparation](#invoking-openlane-and-design-preparation)
 3. [Synthesis](#synthesis)
 4. [Floorplaning](#floorplaning)
 5. [Placement](#placement)
@@ -191,11 +191,20 @@ The above timing parameters can be computed by noting down various values from t
 ![Screenshot from 2023-08-13 08-27-10](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/4b1ab738-294b-4c26-8f5a-ee2b1c3e5d93)
 
 
+# Timing analysis and Clock tree synthesis
+
+
+
+# Final steps in RTL to GDSII
+
+
+
+# Conclusion
 
 
 
 
-## Acknowledgements 
+# Acknowledgements 
 
 - [The OpenROAD Project](https://github.com/The-OpenROAD-Project/OpenLane)
 - [Nickson Jose](https://github.com/nickson-jose/vsdstdcelldesign)

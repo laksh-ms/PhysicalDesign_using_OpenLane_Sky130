@@ -203,8 +203,7 @@ To ensure that ports lie on the intersection point, the grid spacing in Magic (t
 grid 0.46um 0.34um 0.23um 0.17um
 
 When extracting LEF file, these ports are what are defined as pins of the macro. These are done in magic tool by adding text with enabling port.
-
-
+![tracks_info](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/6fc70e6b-b4b0-4ca6-aa22-c77cdfcf1151)
 
 
 - Convert Magic Layout to LEF:
@@ -212,12 +211,16 @@ When extracting LEF file, these ports are what are defined as pins of the macro.
   Replacing Lef file of the custom designed inverter into picorv32a design. LEF exposes only the necessary things need for the PnR tool and protecting the logic or intellectual property.
 
   A and Y is attached to locali layer and Vdd and Gnd attached to metal1 layer. To set port class and port attribute refer standard cell characterization. Saved it as sky130_invsd.mag
+  
+![Screenshot from 2023-08-13 10-15-04](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/f2c09006-08e5-4f0b-b53d-4ab0614b04a2)
+
+![Screenshot from 2023-08-13 10-21-00](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/1998329b-27d7-42cd-83d7-a2781c71b4d5)
 
 To extact LEF file as sky130_invsd.lef
 ```
 lef write
 ```
-
+![Screenshot from 2023-08-13 10-41-06](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/d42c036c-a878-42dc-b1c1-73cff6ec183d)
 
 
 - Custom inverter in picorv32a
@@ -226,20 +229,34 @@ lef write
 
 Copy the extracted LEF file from layout into designs\picorv32a\src directory along with sky130_fd_sc_hd_*.lib from the reference repository. Custom cell inverter characterization information is included in above mentioned libs.
 
+![Screenshot from 2023-08-13 10-50-16](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/de75d437-7eb7-4f04-9cec-195631e3ae53)
 
 
 - Mmodify design\picorv32a\config.tcl
 
+![Screenshot from 2023-08-13 11-16-51](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/78a64928-97e5-4200-ac91-e1de39f30186)
+
 
 - Now perform openLANE design flow
 
+![Screenshot from 2023-08-13 11-25-07](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/506f70e2-43af-4631-abf3-cdfc9e9a5f2f)
+
+  
+```
 % package require openLANE 0.9
+
 % prep -design picorv32a -tag 12-08_20-54 -overwrite
+
 % set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+
 % add_lefs -src $lefs
+
 % run_synthesis
+
 % run_floorplan
+
 % run_placement
+```
 
 
 

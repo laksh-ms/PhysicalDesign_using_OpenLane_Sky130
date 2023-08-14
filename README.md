@@ -199,10 +199,12 @@ The above timing parameters can be computed by noting down various values from t
 Tracks are used in routing stages. Routes are metal traces which can go over the tracks. The information of horizontal and vertical tracks present in each layer is given in tracks.info file.
 
 To ensure that ports lie on the intersection point, the grid spacing in Magic (tkcon) must be changed to the li1 X and li1 Y values. Convergence of grid and tracks can be achieved using the following command:
-
+```
 grid 0.46um 0.34um 0.23um 0.17um
+```
+![Screenshot from 2023-08-13 19-07-19](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/d23c47b4-3c2c-4138-8915-3da8cde5c2aa)
 
-When extracting LEF file, these ports are what are defined as pins of the macro. These are done in magic tool by adding text with enabling port.
+
 ![tracks_info](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/6fc70e6b-b4b0-4ca6-aa22-c77cdfcf1151)
 
 
@@ -216,11 +218,13 @@ When extracting LEF file, these ports are what are defined as pins of the macro.
 
 ![Screenshot from 2023-08-13 10-21-00](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/1998329b-27d7-42cd-83d7-a2781c71b4d5)
 
-To extact LEF file as sky130_invsd.lef
+When extracting LEF file, these ports are what are defined as pins of the macro. These are done in magic tool by adding text with enabling port.
+
+To extact LEF file as sky130_inv_lak.lef
 ```
 lef write
 ```
-![Screenshot from 2023-08-13 10-41-06](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/d42c036c-a878-42dc-b1c1-73cff6ec183d)
+![Screenshot from 2023-08-13 21-00-08](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/24168bf7-f9f0-4ed6-83e2-6ac3f7f66431)
 
 
 - Custom inverter in picorv32a
@@ -231,14 +235,16 @@ Copy the extracted LEF file from layout into designs\picorv32a\src directory alo
 
 ![Screenshot from 2023-08-13 10-50-16](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/de75d437-7eb7-4f04-9cec-195631e3ae53)
 
+![Screenshot from 2023-08-13 21-22-38](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/a3e71232-b9dc-462c-b7d9-f93c5a5ea1cb)
 
 - Modify design\picorv32a\config.tcl
 
-
+![Screenshot from 2023-08-13 12-52-41](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/9803fa06-1f85-4566-a344-10e000f752dd)
 
 
 - Now perform openLANE design flow
-  ```
+  
+```
 % package require openLANE 0.9
 
 % prep -design picorv32a -tag 12-08_20-54 -overwrite
@@ -251,6 +257,7 @@ Copy the extracted LEF file from layout into designs\picorv32a\src directory alo
 ```
 
 ![Screenshot from 2023-08-13 11-25-07](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/506f70e2-43af-4631-abf3-cdfc9e9a5f2f)
+![Screenshot from 2023-08-13 21-43-15](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/edd3e695-4d24-40d5-be6c-5f1d91d63fae)
 
   
 
@@ -259,6 +266,7 @@ Copy the extracted LEF file from layout into designs\picorv32a\src directory alo
 
 % run_placement
 ```
+![Screenshot from 2023-08-14 01-00-47](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/7913c6e2-9974-4d11-928c-c7409ee047bb)
 
 If floorplan throws error then follow below steps post run_synthesis:
 ```
@@ -268,6 +276,12 @@ global_placement_or
 tap_decap_or
 run_placement
 ```
+![Screenshot from 2023-08-13 22-04-07](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/cba163ca-0ac7-429a-9d9b-25f124f4fd11)
+
+![Screenshot from 2023-08-13 22-02-05](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/9be1077b-91ab-4a41-855f-e82e52a5ea1f)
+
+
+
 ```
 run_cts
 gen_pdn
@@ -278,14 +292,18 @@ run_routing
 
 WNS (worst negative slack)and TNS (total negative slack) are referred as the worst path delay and total path delay in regards to setup timing constraint. Fixing slack violations and analyzing is done using OpenSTA tool. These analysis are performed out of the openLANE flow.
 For this, a new file `pre_sta.conf` and `my_base.sdc` files are created. 
+![Screenshot from 2023-08-14 05-17-40](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/3fa51f22-e32b-4fe5-8f39-da766fd3ff4a)
 
-Invoke OpenSTA outside the openLANE flow as follows:
+Invoke OpenSTA outside the openLANE flow under openlane directory as follows:
 ```
 sta pre_sta.conf
 ```
+![Screenshot from 2023-08-14 05-33-26](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/aefd0b63-21f0-42c2-bcba-a20987758c8a)
+
 
 - Fixing slack violations
 
+![Screenshot from 2023-08-13 21-49-08](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/9535f3be-b824-46eb-b3c2-611c3d1952c6)
 
 
 

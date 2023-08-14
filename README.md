@@ -213,7 +213,9 @@ grid 0.46um 0.34um 0.23um 0.17um
   Replacing Lef file of the custom designed inverter into picorv32a design. LEF exposes only the necessary things need for the PnR tool and protecting the logic or intellectual property.
 
   A and Y is attached to locali layer and Vdd and Gnd attached to metal1 layer. To set port class and port attribute refer standard cell characterization. Saved it as sky130_inv_lak.mag
-  
+
+![Screenshot from 2023-08-13 20-57-31](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/b308619a-639e-49dc-8483-c8cd2e02cd1a)
+
 ![Screenshot from 2023-08-13 10-15-04](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/f2c09006-08e5-4f0b-b53d-4ab0614b04a2)
 
 ![Screenshot from 2023-08-13 10-21-00](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/1998329b-27d7-42cd-83d7-a2781c71b4d5)
@@ -284,7 +286,11 @@ run_placement
 
 WNS (worst negative slack)and TNS (total negative slack) are referred as the worst path delay and total path delay in regards to setup timing constraint. Fixing slack violations and analyzing is done using OpenSTA tool. These analysis are performed out of the openLANE flow.
 For this, a new file `pre_sta.conf` and `my_base.sdc` files are created. 
+
 ![Screenshot from 2023-08-14 05-17-40](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/3fa51f22-e32b-4fe5-8f39-da766fd3ff4a)
+
+![Screenshot from 2023-08-14 05-20-27](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/2299ddd8-893d-4190-af60-cbb77967b253)
+
 
 Invoke OpenSTA outside the openLANE flow under openlane directory as follows:
 ```
@@ -293,6 +299,12 @@ sta pre_sta.conf
 ![Screenshot from 2023-08-14 05-33-26](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/aefd0b63-21f0-42c2-bcba-a20987758c8a)
 
 - Fixing slack violations
+  
+  For the design to be complete, the worst negative slack needs to be above or equal to 0. If the slack is not within the range:
+
+      * Review synthesis strategy in OpenLANE
+      * Enable cell buffering, and synthesis sizing values
+      * Review maximum fanout of cells
 
 ![Screenshot from 2023-08-13 21-49-08](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/9535f3be-b824-46eb-b3c2-611c3d1952c6)
 

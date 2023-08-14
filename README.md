@@ -272,6 +272,7 @@ global_placement_or
 tap_decap_or
 run_placement
 ```
+Merger.lef has the custom inverter macro int it.:
 
 ![Screenshot from 2023-08-14 01-00-47](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/7913c6e2-9974-4d11-928c-c7409ee047bb)
 

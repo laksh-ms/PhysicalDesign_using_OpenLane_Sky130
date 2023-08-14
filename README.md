@@ -238,11 +238,7 @@ Copy the extracted LEF file from layout into designs\picorv32a\src directory alo
 
 
 - Now perform openLANE design flow
-
-![Screenshot from 2023-08-13 11-25-07](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/506f70e2-43af-4631-abf3-cdfc9e9a5f2f)
-
-  
-```
+  ```
 % package require openLANE 0.9
 
 % prep -design picorv32a -tag 12-08_20-54 -overwrite
@@ -252,15 +248,45 @@ Copy the extracted LEF file from layout into designs\picorv32a\src directory alo
 % add_lefs -src $lefs
 
 % run_synthesis
+```
 
+![Screenshot from 2023-08-13 11-25-07](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/506f70e2-43af-4631-abf3-cdfc9e9a5f2f)
+
+  
+
+```
 % run_floorplan
 
 % run_placement
 ```
 
+If floorplan throws error then follow below steps post run_synthesis:
+```
+init_floorplan
+place_io
+global_placement_or
+tap_decap_or
+run_placement
+```
+```
+run_cts
+gen_pdn
+run_routing
+```
+
+- Timing analysis and CTS
+
+WNS (worst negative slack)and TNS (total negative slack) are referred as the worst path delay and total path delay in regards to setup timing constraint. Fixing slack violations and analyzing is done using OpenSTA tool. These analysis are performed out of the openLANE flow.
+For this, a new file `pre_sta.conf` and `my_base.sdc` files are created. 
+
+Invoke OpenSTA outside the openLANE flow as follows:
+```
+sta pre_sta.conf
+```
+
+- Fixing slack violations
 
 
-  
 
 
 # Final steps in RTL to GDSII

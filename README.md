@@ -202,25 +202,23 @@ To ensure that ports lie on the intersection point, the grid spacing in Magic (t
 ```
 grid 0.46um 0.34um 0.23um 0.17um
 ```
-![Screenshot from 2023-08-13 19-07-19](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/d23c47b4-3c2c-4138-8915-3da8cde5c2aa)
-
 
 ![tracks_info](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/6fc70e6b-b4b0-4ca6-aa22-c77cdfcf1151)
 
 
 - Convert Magic Layout to LEF:
+
+  LEF exposes only the necessary things need for the PnR tool and protecting the logic or intellectual property.
   
-  Replacing Lef file of the custom designed inverter into picorv32a design. LEF exposes only the necessary things need for the PnR tool and protecting the logic or intellectual property.
+When extracting LEF file, these ports are what are defined as pins of the macro. These are done in magic tool by adding text with enabling port.
 
   A and Y is attached to locali layer and Vdd and Gnd attached to metal1 layer. To set port class and port attribute refer standard cell characterization. Saved it as sky130_inv_lak.mag
-
-![Screenshot from 2023-08-13 20-57-31](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/b308619a-639e-49dc-8483-c8cd2e02cd1a)
+  
+![Screenshot from 2023-08-13 20-57-31](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/bba9513c-11ea-4c50-b904-ded7514c4923)
 
 ![Screenshot from 2023-08-13 10-15-04](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/f2c09006-08e5-4f0b-b53d-4ab0614b04a2)
 
 ![Screenshot from 2023-08-13 10-21-00](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/1998329b-27d7-42cd-83d7-a2781c71b4d5)
-
-When extracting LEF file, these ports are what are defined as pins of the macro. These are done in magic tool by adding text with enabling port.
 
 To extact LEF file as sky130_inv_lak.lef
 ```
@@ -229,7 +227,7 @@ lef write
 ![Screenshot from 2023-08-13 21-00-08](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/24168bf7-f9f0-4ed6-83e2-6ac3f7f66431)
 
 
-- Custom inverter in picorv32a
+- Custom inverter incorporated in picorv32a
 
   o include the custom inverter cell into the openLANE flow
 

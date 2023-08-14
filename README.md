@@ -212,7 +212,7 @@ grid 0.46um 0.34um 0.23um 0.17um
   
   Replacing Lef file of the custom designed inverter into picorv32a design. LEF exposes only the necessary things need for the PnR tool and protecting the logic or intellectual property.
 
-  A and Y is attached to locali layer and Vdd and Gnd attached to metal1 layer. To set port class and port attribute refer standard cell characterization. Saved it as sky130_invsd.mag
+  A and Y is attached to locali layer and Vdd and Gnd attached to metal1 layer. To set port class and port attribute refer standard cell characterization. Saved it as sky130_inv_lak.mag
   
 ![Screenshot from 2023-08-13 10-15-04](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/f2c09006-08e5-4f0b-b53d-4ab0614b04a2)
 
@@ -256,18 +256,14 @@ Copy the extracted LEF file from layout into designs\picorv32a\src directory alo
 % run_synthesis
 ```
 
-![Screenshot from 2023-08-13 11-25-07](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/506f70e2-43af-4631-abf3-cdfc9e9a5f2f)
 ![Screenshot from 2023-08-13 21-43-15](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/edd3e695-4d24-40d5-be6c-5f1d91d63fae)
-
-  
+ 
 
 ```
 % run_floorplan
 
 % run_placement
 ```
-![Screenshot from 2023-08-14 01-00-47](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/7913c6e2-9974-4d11-928c-c7409ee047bb)
-
 If floorplan throws error then follow below steps post run_synthesis:
 ```
 init_floorplan
@@ -276,17 +272,13 @@ global_placement_or
 tap_decap_or
 run_placement
 ```
+
+![Screenshot from 2023-08-14 01-00-47](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/7913c6e2-9974-4d11-928c-c7409ee047bb)
+
 ![Screenshot from 2023-08-13 22-04-07](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/cba163ca-0ac7-429a-9d9b-25f124f4fd11)
 
 ![Screenshot from 2023-08-13 22-02-05](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/9be1077b-91ab-4a41-855f-e82e52a5ea1f)
 
-
-
-```
-run_cts
-gen_pdn
-run_routing
-```
 
 - Timing analysis and CTS
 
@@ -300,12 +292,16 @@ sta pre_sta.conf
 ```
 ![Screenshot from 2023-08-14 05-33-26](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/aefd0b63-21f0-42c2-bcba-a20987758c8a)
 
-
 - Fixing slack violations
 
 ![Screenshot from 2023-08-13 21-49-08](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/9535f3be-b824-46eb-b3c2-611c3d1952c6)
 
-
+- Next perform:
+```
+run_cts
+gen_pdn
+run_routing
+```
 
 # Final steps in RTL to GDSII
 

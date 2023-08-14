@@ -317,8 +317,7 @@ run_routing
 
 # Conclusion
 
-`gds` file was be generated at location $OPENLANE_ROOT/designs/picorv32a/runs/08-12_20-54/results/magic/picorv32a.gds
-
+`gds` file was be generated at location $OPENLANE_ROOT/designs/picorv32a/runs/12-08_20-54/results/magic/picorv32a.gds
 
 
 # Acknowledgements 

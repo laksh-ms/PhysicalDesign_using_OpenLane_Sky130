@@ -237,7 +237,7 @@ Copy the extracted LEF file from layout into designs\picorv32a\src directory alo
 
 ![Screenshot from 2023-08-13 21-22-38](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/a3e71232-b9dc-462c-b7d9-f93c5a5ea1cb)
 
-- Modify design\picorv32a\config.tcl
+- Modify design/picorv32a/config.tcl
 
 ![Screenshot from 2023-08-13 12-52-41](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/9803fa06-1f85-4566-a344-10e000f752dd)
 
@@ -245,15 +245,13 @@ Copy the extracted LEF file from layout into designs\picorv32a\src directory alo
 - Now perform openLANE design flow
   
 ```
-% package require openLANE 0.9
-
-% prep -design picorv32a -tag 12-08_20-54 -overwrite
-
-% set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
-
-% add_lefs -src $lefs
-
-% run_synthesis
+docker
+./flow.tcl - interactive
+package require openLANE 0.9
+ prep -design picorv32a -tag 12-08_20-54 -overwrite
+set lefs [glob $::env(DESIGN_DIR)/src/*.lef]
+add_lefs -src $lefs
+run_synthesis
 ```
 
 ![Screenshot from 2023-08-13 21-43-15](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/edd3e695-4d24-40d5-be6c-5f1d91d63fae)
@@ -272,7 +270,7 @@ global_placement_or
 tap_decap_or
 run_placement
 ```
-Merger.lef has the custom inverter macro int it.:
+Check if Merged.lef has the custom inverter macro int it.:
 
 ![Screenshot from 2023-08-14 01-00-47](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/7913c6e2-9974-4d11-928c-c7409ee047bb)
 
@@ -308,7 +306,9 @@ sta pre_sta.conf
       * Perform manual cell replacement using the OpenSTA tool (This step then alters the netlist by cell replacement techniques. Therefore, the verilog file needs to be modified using the "write_verilog" command in openSTA. Then, perform floorplan and placement  again, WITHOUT running the synthesis again. )
   Note: All openLANE configuration parameters are mentioned in $OPENLANE_ROOT/configuration/README.md
   
-  
+  ![Screenshot from 2023-08-15 07-08-49](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/021f876b-21ef-4bef-ab9f-6cb05ee0f9bb)
+
+![write_verilog_in_opensta](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/de9754e0-cd66-42f0-a16e-c745210dd857)
 
 
 - Next perform CTS:
@@ -317,7 +317,9 @@ sta pre_sta.conf
 ```
 run_cts
 ```
+![running_cts](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/617a26a6-53b0-4cde-9659-0dab02566f24)
 
+![cts_complete](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/b24a61e6-5ca7-4f4b-8508-b41e1a8fb032)
 
 - Further analysis of CTS in done in openROAD which is integrated in openLANE flow using openSTA tool. As the CTS run adds clock buffers in therefore buffer delays come into picture and our analysis from here on deals with real clocks. Setup and hold time slacks may now be analysed in the post-CTS STA anlysis in OpenROAD within the openLANE flow:
   Note: All variables of openroad can be accessed in openlane flow.
@@ -350,6 +352,7 @@ report_checks -path_delay min_max -format full_clock_expanded -digits 4
 ```
 Note: TritonCTS is designed for only Typical corner (i.e. it cannot create optimized CTS for multiple corners)
 
+![slack_met_after_cts_openroad_typical_corner](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/1544a4f4-ba71-4f73-98d9-1b821e47ddf1)
 
 
 Try removing sky130_fd_sc_hd__clkbuf_1 from clock tree and do post cts timing analysis
@@ -363,20 +366,20 @@ sky130_fd_sc_hd__clkbuf_2 sky130_fd_sc_hd__clkbuf_4 sky130_fd_sc_hd__clkbuf_8
 % set ::env(CURRENT_DEF) /openLANE_flow/designs/picorv32a/runs/03-07_16-12/results/placement/picorv32a.placement.def
 ```
 Now run openROAD and do a timing analysis as mentioned above.
-Including large size clock buffers in clock path improves slack but area increases.
+Note: Including large size clock buffers in clock path improves slack but area increases.
 
 
 # Final steps in RTL to GDSII
 
 - PDN (Power distribution network)
-  Typically in ASIC P&R, the Power planning is done with floorplanning in which power grid network is created to distribute power to each part of the design equally. In openLANE flow it is done before routing. It is done with the following command and This generates new def file in ~runs/12-08_20-54/tmp/floorplan/17-pdn.def:
+  Typically in ASIC P&R, the Power planning is done with floorplanning in which power grid network is created to distribute power to each part of the design equally. In openLANE flow it is done before routing. It is done with the following command and This generates new def file in /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/12-08_20-54/tmp/floorplan/17-pdn.def:
   
   ```
   gen_pdn
   ```
+![gen_pdn](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/4eb739d0-ec9f-49fc-ac74-44150f9f1638)
 
-
-
+![pdn_success](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/b754f257-56cc-4543-9b5c-2ee3ea8b1d3a)
 
   
 - Routing
@@ -386,26 +389,28 @@ To perform routing:
 ```
   run_routing
 ```
+![run_routing](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/fcb6dcb8-85f4-4119-ad7a-c44bf4e5ca3f)
 
+![routing_2](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/d2451238-3c62-4d42-a7a8-7c63a211ad80)
 
 
 After routing magic tool can be used to get routing view from runs directory:
 ```
 magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read 12-08_20-54/tmp/merged.lef def read 12-08_20-54/results/routing/picorv32a.def &
 ```
+![final_layout](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/78b00252-ec5d-499e-b445-bc23c40b580b)
 
+![zoomed_picorv32a](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/e0b18bd9-9b6b-46ea-8cf1-74dc925a06b7)
 
-
+Custom inverter in the final Routed view:
+![inv_lak_final](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/dcd677a1-7373-44ea-84ce-28daa8d65ac4)
 
   
 - SPEF extraction
 
   After routing has been completed interconnect parasitics can be extracted to perform sign-off post-route STA analysis. The parasitics are extracted into a SPEF file using SPEF-Extractor.
 
-spef file will be generated after run_routing command at location $OPENLANE_ROOT/designs/picorv32a/runs/12-08_20-54/results/routing/picorv32a.spef
-
-
-
+spef file will be generated after run_routing command at location /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/12-08_20-54/results/routing/picorv32a.spef
 
 - GDSII
 
@@ -415,13 +420,14 @@ To generate GDSII file:
 ```
 run_magic
 ```
+![gds_write_complete](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/2e1077a2-76b3-4753-9016-e91ed4974f2d)
 
-
+![final_gds](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/9654083e-8fbc-4245-b228-3f9032a19f99)
 
 
 # Conclusion
 
-`gds` file was be generated at location $OPENLANE_ROOT/designs/picorv32a/runs/12-08_20-54/results/magic/picorv32a.gds
+`gds` file was be generated at location /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/12-08_20-54/results/magic/picorv32a.gds
 
 
 # Acknowledgements 

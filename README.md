@@ -416,7 +416,9 @@ magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs
 
 ![zoomed_picorv32a](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/e0b18bd9-9b6b-46ea-8cf1-74dc925a06b7)
 
+
 Custom inverter in the final Routed view:
+
 ![inv_lak_final](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/dcd677a1-7373-44ea-84ce-28daa8d65ac4)
 
   
@@ -436,12 +438,15 @@ run_magic
 ```
 ![gds_write_complete](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/2e1077a2-76b3-4753-9016-e91ed4974f2d)
 
+No DRC errors are found.
+
 ![final_gds](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/9654083e-8fbc-4245-b228-3f9032a19f99)
 
 
 # Conclusion
 
-`gds` file was be generated at location /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/12-08_20-54/results/magic/picorv32a.gds
+Clean `gds` file with No DRC errors was generated at location 
+/home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/12-08_20-54/results/magic/picorv32a.gds
 
 
 # Acknowledgements 

@@ -1,0 +1,209 @@
+
+Magic 8.3 revision 179 - Compiled on Tue Jun 15 07:12:53 UTC 2021.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+Using NULL graphics device.
+Processing system .magicrc file
+Sourcing design .magicrc for technology sky130A ...
+2 Magic internal units = 1 Lambda
+Input style sky130(): scaleFactor=2, multiplier=2
+Scaled tech values by 2 / 1 to match internal grid scaling
+Loading sky130A Device Generator Menu ...
+Loading "/openLANE_flow/scripts/magic/mag_gds.tcl" from command line.
+Reading LEF data from file /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd.tlef.
+This action cannot be undone.
+LEF read, Line 77 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 78 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 110 (Message): Unknown keyword "MINENCLOSEDAREA" in LEF file; ignoring.
+LEF read, Line 112 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 113 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 119 (Message): Unknown keyword "MAXIMUMDENSITY" in LEF file; ignoring.
+LEF read, Line 120 (Message): Unknown keyword "DENSITYCHECKWINDOW" in LEF file; ignoring.
+LEF read, Line 121 (Message): Unknown keyword "DENSITYCHECKSTEP" in LEF file; ignoring.
+LEF read, Line 153 (Message): Unknown keyword "MINENCLOSEDAREA" in LEF file; ignoring.
+LEF read, Line 161 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 162 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 164 (Message): Unknown keyword "MAXIMUMDENSITY" in LEF file; ignoring.
+LEF read, Line 165 (Message): Unknown keyword "DENSITYCHECKWINDOW" in LEF file; ignoring.
+LEF read, Line 166 (Message): Unknown keyword "DENSITYCHECKSTEP" in LEF file; ignoring.
+LEF read, Line 202 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 203 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 205 (Message): Unknown keyword "MAXIMUMDENSITY" in LEF file; ignoring.
+LEF read, Line 206 (Message): Unknown keyword "DENSITYCHECKWINDOW" in LEF file; ignoring.
+LEF read, Line 207 (Message): Unknown keyword "DENSITYCHECKSTEP" in LEF file; ignoring.
+LEF read, Line 243 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 244 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 246 (Message): Unknown keyword "MAXIMUMDENSITY" in LEF file; ignoring.
+LEF read, Line 247 (Message): Unknown keyword "DENSITYCHECKWINDOW" in LEF file; ignoring.
+LEF read, Line 248 (Message): Unknown keyword "DENSITYCHECKSTEP" in LEF file; ignoring.
+LEF read, Line 284 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 285 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read: Processed 791 lines.
+Reading LEF data from file /openLANE_flow/designs/picorv32a/src/sky130_inv_lak.lef.
+This action cannot be undone.
+LEF read: Processed 66 lines.
+Reading DEF data from file /openLANE_flow/designs/picorv32a/runs/12-08_20-54/results/routing/picorv32a.def.
+This action cannot be undone.
+  Processed 6 vias total.
+  Processed 57071 subcell instances total.
+  Processed 427 pins total.
+  Processed 2 special nets total.
+  Processed 15770 nets total.
+DEF read: Processed 390232 lines.
+Root cell box:
+           width x height  (   llx,  lly  ), (   urx,  ury  )  area (units^2)
+
+microns:  660.68 x 671.40  (  0.00,  0.00 ), ( 660.68,  671.40)  443587.19 
+lambda:   66068.50 x 67140.50  (  0.00,  0.00 ), ( 66068.50,  67140.50)  4435872256.00
+internal: 132137 x 134281  (     0,  0    ), ( 132137,  134281)  17743488497
+   Generating output for cell sky130_fd_sc_hd__decap_4
+   Generating output for cell sky130_fd_sc_hd__clkbuf_2
+   Generating output for cell sky130_fd_sc_hd__buf_6
+   Generating output for cell sky130_fd_sc_hd__decap_3
+   Generating output for cell sky130_fd_sc_hd__fill_2
+   Generating output for cell sky130_fd_sc_hd__decap_8
+   Generating output for cell sky130_fd_sc_hd__conb_1
+   Generating output for cell sky130_fd_sc_hd__decap_12
+   Generating output for cell sky130_fd_sc_hd__tapvpwrvgnd_1
+   Generating output for cell sky130_fd_sc_hd__fill_1
+   Generating output for cell sky130_fd_sc_hd__decap_6
+   Generating output for cell sky130_fd_sc_hd__diode_2
+   Generating output for cell sky130_fd_sc_hd__dfxtp_1
+Warning:  Writing abstract view of "sky130_inv_lak" to GDS.  This is probably not what you want to do.
+   Generating output for cell sky130_inv_lak
+   Generating output for cell sky130_fd_sc_hd__mux4_2
+   Generating output for cell sky130_fd_sc_hd__a22o_1
+   Generating output for cell sky130_fd_sc_hd__buf_1
+   Generating output for cell sky130_fd_sc_hd__mux4_1
+   Generating output for cell sky130_fd_sc_hd__mux2_4
+   Generating output for cell sky130_fd_sc_hd__clkbuf_16
+   Generating output for cell sky130_fd_sc_hd__buf_2
+   Generating output for cell sky130_fd_sc_hd__buf_4
+   Generating output for cell sky130_fd_sc_hd__clkbuf_1
+   Generating output for cell sky130_fd_sc_hd__clkbuf_4
+   Generating output for cell sky130_fd_sc_hd__clkbuf_8
+   Generating output for cell sky130_fd_sc_hd__buf_8
+   Generating output for cell sky130_fd_sc_hd__dfxtp_2
+   Generating output for cell sky130_fd_sc_hd__buf_12
+   Generating output for cell sky130_fd_sc_hd__mux2_2
+   Generating output for cell sky130_fd_sc_hd__clkinv_8
+   Generating output for cell sky130_fd_sc_hd__dfxtp_4
+   Generating output for cell sky130_fd_sc_hd__or3b_2
+   Generating output for cell sky130_fd_sc_hd__nor2_8
+   Generating output for cell sky130_fd_sc_hd__or3_4
+   Generating output for cell sky130_fd_sc_hd__a21oi_1
+   Generating output for cell sky130_fd_sc_hd__or2_1
+   Generating output for cell sky130_fd_sc_hd__nand2_1
+   Generating output for cell sky130_fd_sc_hd__o22a_1
+   Generating output for cell sky130_fd_sc_hd__o21a_1
+   Generating output for cell sky130_fd_sc_hd__o21ai_1
+   Generating output for cell sky130_fd_sc_hd__nor2_1
+   Generating output for cell sky130_fd_sc_hd__or2_2
+   Generating output for cell sky130_fd_sc_hd__mux2_1
+   Generating output for cell sky130_fd_sc_hd__a2bb2oi_1
+   Generating output for cell sky130_fd_sc_hd__and2_2
+   Generating output for cell sky130_fd_sc_hd__nor2_2
+   Generating output for cell sky130_fd_sc_hd__a31o_1
+   Generating output for cell sky130_fd_sc_hd__o22a_2
+   Generating output for cell sky130_fd_sc_hd__o32a_1
+   Generating output for cell sky130_fd_sc_hd__a21oi_2
+   Generating output for cell sky130_fd_sc_hd__o221a_1
+   Generating output for cell sky130_fd_sc_hd__a221o_1
+   Generating output for cell sky130_fd_sc_hd__and2_1
+   Generating output for cell sky130_fd_sc_hd__mux2_8
+   Generating output for cell sky130_fd_sc_hd__inv_2
+   Generating output for cell sky130_fd_sc_hd__a21oi_4
+   Generating output for cell sky130_fd_sc_hd__a211o_1
+   Generating output for cell sky130_fd_sc_hd__a21o_1
+   Generating output for cell sky130_fd_sc_hd__or4_4
+   Generating output for cell sky130_fd_sc_hd__o21ai_2
+   Generating output for cell sky130_fd_sc_hd__o22ai_1
+   Generating output for cell sky130_fd_sc_hd__o22ai_4
+   Generating output for cell sky130_fd_sc_hd__nor3_2
+   Generating output for cell sky130_fd_sc_hd__o2bb2a_1
+   Generating output for cell sky130_fd_sc_hd__a21bo_1
+   Generating output for cell sky130_fd_sc_hd__nor3_1
+   Generating output for cell sky130_fd_sc_hd__nor3_4
+   Generating output for cell sky130_fd_sc_hd__and3_1
+   Generating output for cell sky130_fd_sc_hd__or2b_1
+   Generating output for cell sky130_fd_sc_hd__o221ai_4
+   Generating output for cell sky130_fd_sc_hd__o311a_1
+   Generating output for cell sky130_fd_sc_hd__a21boi_1
+   Generating output for cell sky130_fd_sc_hd__o31a_1
+   Generating output for cell sky130_fd_sc_hd__o2bb2a_2
+   Generating output for cell sky130_fd_sc_hd__a32o_1
+   Generating output for cell sky130_fd_sc_hd__a31oi_4
+   Generating output for cell sky130_fd_sc_hd__o221a_2
+   Generating output for cell sky130_fd_sc_hd__or3b_4
+   Generating output for cell sky130_fd_sc_hd__o221ai_1
+   Generating output for cell sky130_fd_sc_hd__a32o_4
+   Generating output for cell sky130_fd_sc_hd__nor2_4
+   Generating output for cell sky130_fd_sc_hd__a221o_4
+   Generating output for cell sky130_fd_sc_hd__a221o_2
+   Generating output for cell sky130_fd_sc_hd__o221ai_2
+   Generating output for cell sky130_fd_sc_hd__o22ai_2
+   Generating output for cell sky130_fd_sc_hd__o311a_4
+   Generating output for cell sky130_fd_sc_hd__o2bb2ai_1
+   Generating output for cell sky130_fd_sc_hd__or4_1
+   Generating output for cell sky130_fd_sc_hd__a2bb2o_1
+   Generating output for cell sky130_fd_sc_hd__and4_1
+   Generating output for cell sky130_fd_sc_hd__and3_4
+   Generating output for cell sky130_fd_sc_hd__or2_4
+   Generating output for cell sky130_fd_sc_hd__a2bb2oi_4
+   Generating output for cell sky130_fd_sc_hd__a2bb2o_2
+   Generating output for cell sky130_fd_sc_hd__o211a_1
+   Generating output for cell sky130_fd_sc_hd__o2111a_1
+   Generating output for cell sky130_fd_sc_hd__or3_1
+   Generating output for cell sky130_fd_sc_hd__a2bb2oi_2
+   Generating output for cell sky130_fd_sc_hd__a21bo_2
+   Generating output for cell sky130_fd_sc_hd__o21ba_1
+   Generating output for cell sky130_fd_sc_hd__clkinv_16
+   Generating output for cell sky130_fd_sc_hd__o22a_4
+   Generating output for cell sky130_fd_sc_hd__nand2_2
+   Generating output for cell sky130_fd_sc_hd__o2bb2ai_2
+   Generating output for cell sky130_fd_sc_hd__o41a_1
+   Generating output for cell sky130_fd_sc_hd__and4b_4
+   Generating output for cell sky130_fd_sc_hd__or3_2
+   Generating output for cell sky130_fd_sc_hd__o211ai_1
+   Generating output for cell sky130_fd_sc_hd__a211oi_2
+   Generating output for cell sky130_fd_sc_hd__a211oi_4
+   Generating output for cell sky130_fd_sc_hd__a2111o_1
+   Generating output for cell sky130_fd_sc_hd__o211ai_4
+   Generating output for cell sky130_fd_sc_hd__o31ai_4
+   Generating output for cell sky130_fd_sc_hd__or4b_4
+   Generating output for cell sky130_fd_sc_hd__o211ai_2
+   Generating output for cell sky130_fd_sc_hd__o21ai_4
+   Generating output for cell sky130_fd_sc_hd__a2bb2o_4
+   Generating output for cell sky130_fd_sc_hd__and2_4
+   Generating output for cell sky130_fd_sc_hd__o31a_2
+   Generating output for cell sky130_fd_sc_hd__or2b_2
+   Generating output for cell sky130_fd_sc_hd__a211o_4
+   Generating output for cell sky130_fd_sc_hd__a41o_1
+   Generating output for cell sky130_fd_sc_hd__o21a_2
+   Generating output for cell sky130_fd_sc_hd__o211a_4
+   Generating output for cell sky130_fd_sc_hd__nand2_8
+   Generating output for cell sky130_fd_sc_hd__a31oi_1
+   Generating output for cell sky130_fd_sc_hd__o211a_2
+   Generating output for cell sky130_fd_sc_hd__and3_2
+   Generating output for cell sky130_fd_sc_hd__inv_16
+   Generating output for cell sky130_fd_sc_hd__a22o_2
+   Generating output for cell sky130_fd_sc_hd__o21bai_1
+   Generating output for cell sky130_fd_sc_hd__nor4_2
+   Generating output for cell sky130_fd_sc_hd__a311o_1
+   Generating output for cell sky130_fd_sc_hd__a21boi_4
+   Generating output for cell sky130_fd_sc_hd__a21boi_2
+   Generating output for cell sky130_fd_sc_hd__nor2b_2
+   Generating output for cell sky130_fd_sc_hd__a311o_4
+   Generating output for cell sky130_fd_sc_hd__a31oi_2
+   Generating output for cell sky130_fd_sc_hd__o221a_4
+   Generating output for cell sky130_fd_sc_hd__o21a_4
+   Generating output for cell sky130_fd_sc_hd__a211oi_1
+   Generating output for cell sky130_fd_sc_hd__or3b_1
+   Generating output for cell sky130_fd_sc_hd__and4_2
+   Generating output for cell sky130_fd_sc_hd__or4bb_4
+   Generating output for cell sky130_fd_sc_hd__dlymetal6s2s_1
+   Generating output for cell sky130_fd_sc_hd__and4_4
+   Generating output for cell sky130_fd_sc_hd__o41a_2
+   Generating output for cell sky130_fd_sc_hd__o31a_4
+   Generating output for cell picorv32a
+[INFO]: GDS Write Complete

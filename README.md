@@ -305,8 +305,22 @@ sta pre_sta.conf
       * Review maximum fanout of cells
       * Perform manual cell replacement using the OpenSTA tool (This step then alters the netlist by cell replacement techniques. Therefore, the verilog file needs to be modified using the "write_verilog" command in openSTA. Then, perform floorplan and placement  again, WITHOUT running the synthesis again. )
   Note: All openLANE configuration parameters are mentioned in $OPENLANE_ROOT/configuration/README.md
+
+```
+set ::env(SYNTH_SIZING) 1
+1
+% set ::env(SYNTH_MAX_FANOUT) 4
+4
+% echo $::env(SYNTH_MAX_FANOUT)
+```
   
   ![Screenshot from 2023-08-15 07-08-49](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/021f876b-21ef-4bef-ab9f-6cb05ee0f9bb)
+
+```
+replace_cell _14481_ sky130_fd_sc_hd__or4_4 
+replace_cell _14506_ sky130_fd_sc_hd__or4_4
+replace_cell _14510_ sky130_fd_sc_hd__or3_4
+```
 
 ![write_verilog_in_opensta](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/de9754e0-cd66-42f0-a16e-c745210dd857)
 

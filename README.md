@@ -295,7 +295,8 @@ Invoke OpenSTA outside the openLANE flow under openlane directory as follows:
 ```
 sta pre_sta.conf
 ```
-![Screenshot from 2023-08-14 05-33-26](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/aefd0b63-21f0-42c2-bcba-a20987758c8a)
+![Screenshot from 2023-08-14 05-33-26](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/772825cd-ae9e-469f-8f99-083f3eb4eec6)
+
 
 - Fixing slack violations
   
@@ -304,21 +305,21 @@ sta pre_sta.conf
       * Review synthesis strategy in OpenLANE
       * Enable cell buffering, and synthesis sizing values
       * Review maximum fanout of cells
-
-![Screenshot from 2023-08-13 21-49-08](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/9535f3be-b824-46eb-b3c2-611c3d1952c6)
+![Screenshot from 2023-08-13 21-49-08 copy](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/c77eb0f9-2465-4a88-bf68-11eb6cad195c)
 
 - Next perform:
 ```
 run_cts
-gen_pdn
-run_routing
 ```
 
 # Final steps in RTL to GDSII
 
 - PDN
+  gen_pdn
+
   
 - Routing
+  run_routing
   
 - SPEF extraction
 

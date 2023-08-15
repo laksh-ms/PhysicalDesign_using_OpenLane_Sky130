@@ -424,9 +424,9 @@ Custom inverter in the final Routed view:
   
 - SPEF extraction
 
-  After routing has been completed interconnect parasitics can be extracted to perform sign-off post-route STA analysis. The parasitics are extracted into a SPEF file using SPEF-Extractor.
+  In old versions of Openlane, after routing has been completed interconnect parasitics can be extracted to perform sign-off post-route STA analysis. The parasitics are extracted into a SPEF file using SPEF-Extractor.
 
-spef file will be generated after run_routing command at location /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/12-08_20-54/results/routing/picorv32a.spef
+The latest version of openlane supports spef generation. The spef file will be generated after run_routing command at location:  /home/vsduser/Desktop/work/tools/openlane_working_dir/openlane/designs/picorv32a/runs/12-08_20-54/results/routing/picorv32a.spef
 
 - GDSII
 

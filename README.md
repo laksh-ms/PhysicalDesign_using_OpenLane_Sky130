@@ -15,7 +15,7 @@ _Lakshmi M Satyananda_, M.Tech VLSI Design, Amrita Vishwa Vidyapeetham
 4. [Floorplaning](#floorplaning)
 5. [Placement](#placement)
 6. [Std. Cell Design](#standard-cell-design)
-7. [Timing analysis and Clock tree synthesis](#timing-analysis-and-clock-design)
+7. [Timing analysis and Clock tree synthesis](#timing-analysis-and-clock-tree-synthesis)
 8. [Final steps in RTL to GDSII](#final-steps-in-rtl-to-gdsii)
 9. [Conclusion](#conclusion)
 10. [Acknowledgements](#acknowledgements)
@@ -305,25 +305,117 @@ sta pre_sta.conf
       * Review synthesis strategy in OpenLANE
       * Enable cell buffering, and synthesis sizing values
       * Review maximum fanout of cells
-![Screenshot from 2023-08-13 21-49-08 copy](https://github.com/laksh-ms/PhysicalDesign_using_OpenLane_Sky130/assets/109785515/c77eb0f9-2465-4a88-bf68-11eb6cad195c)
+      * Perform manual cell replacement using the OpenSTA tool (This step then alters the netlist by cell replacement techniques. Therefore, the verilog file needs to be modified using the "write_verilog" command in openSTA. Then, perform floorplan and placement  again, WITHOUT running the synthesis again. )
+  Note: All openLANE configuration parameters are mentioned in $OPENLANE_ROOT/configuration/README.md
+  
+  
 
-- Next perform:
+
+- Next perform CTS:
+  The main concern in generation of clock tree is the clock skew, difference in arrival times of the clock for sequential elements across the design.To ensure timing constraints CTS will add buffers throughout the clock tree which will modify our netlist. This will generate new def file which is used in routing.
+  
 ```
 run_cts
 ```
 
+
+- Further analysis of CTS in done in openROAD which is integrated in openLANE flow using openSTA tool. As the CTS run adds clock buffers in therefore buffer delays come into picture and our analysis from here on deals with real clocks. Setup and hold time slacks may now be analysed in the post-CTS STA anlysis in OpenROAD within the openLANE flow:
+  Note: All variables of openroad can be accessed in openlane flow.
+```
+% echo $::env(LIB_CTS)
+/openLANE_flow/designs/picorv32a/runs/12-08_20-54/tmp/cts.lib
+% echo $::env(CURRENT_DEF)
+/openLANE_flow/designs/picorv32a/runs/12-08_20-54/results/cts/picorv32a.cts.def
+% echo $::env(LIB_TYPICAL)
+/openLANE_flow/designs/picorv32a/src/sky130_fd_sc_hd__typical.lib
+% echo $::env(CTS_MAX_CAP)
+1.53169
+% 
+% openroad
+```
+
+Following steps was performed in openRoad for post_cts timming analysis:
+
+```
+read_lef /openLANE_flow/designs/picorv32a/runs/12-08_20-54/tmp/merged.lef
+read_def /openLANE_flow/designs/picorv32a/runs/12-08_20-54/results/cts/picorv32a.cts.def
+write_db pico_cts.db
+read_db pico_cts.db
+read_verilog /openLANE_flow/designs/picorv32a/runs/12-08_20-54/results/synthesis/picorv32a.synthesis_cts.v
+read_liberty $::env(LIB_SYNTH_COMPLETE)
+link_design picorv32a
+read_sdc /openLANE_flow/designs/picorv32a/src/my_base.sdc
+set_propagated_clock (all_clocks)
+report_checks -path_delay min_max -format full_clock_expanded -digits 4
+```
+Note: TritonCTS is designed for only Typical corner (i.e. it cannot create optimized CTS for multiple corners)
+
+
+
+Try removing sky130_fd_sc_hd__clkbuf_1 from clock tree and do post cts timing analysis
+```
+% set ::env(CTS_CLK_BUFFER_LIST) [lreplace $::env(CTS_CLK_BUFFER_LIST) 0 0]
+sky130_fd_sc_hd__clkbuf_2 sky130_fd_sc_hd__clkbuf_4 sky130_fd_sc_hd__clkbuf_8
+% echo $::env(CTS_CLK_BUFFER_LIST)
+sky130_fd_sc_hd__clkbuf_2 sky130_fd_sc_hd__clkbuf_4 sky130_fd_sc_hd__clkbuf_8
+% echo $::env(CURRENT_DEF)
+/openLANE_flow/designs/picorv32a/runs/03-07_16-12/results/cts/picorv32a.cts.def
+% set ::env(CURRENT_DEF) /openLANE_flow/designs/picorv32a/runs/03-07_16-12/results/placement/picorv32a.placement.def
+```
+Now run openROAD and do a timing analysis as mentioned above.
+Including large size clock buffers in clock path improves slack but area increases.
+
+
 # Final steps in RTL to GDSII
 
-- PDN
+- PDN (Power distribution network)
+  Typically in ASIC P&R, the Power planning is done with floorplanning in which power grid network is created to distribute power to each part of the design equally. In openLANE flow it is done before routing. It is done with the following command and This generates new def file in ~runs/12-08_20-54/tmp/floorplan/17-pdn.def:
+  
+  ```
   gen_pdn
+  ```
+
+
+
 
   
 - Routing
+
+Routing is the stage where the interconnnections. This includes interconnections of standard cells, the macro pins, the pins of the block boundary or pads of the chip boundary. Logical connectivity is defined by netlist and design rules are defined in technology file are available to routing tool. In routing stage, metal and vias are used to create the electrical connections.
+To perform routing:
+```
   run_routing
+```
+
+
+
+After routing magic tool can be used to get routing view from runs directory:
+```
+magic -T /home/vsduser/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read 12-08_20-54/tmp/merged.lef def read 12-08_20-54/results/routing/picorv32a.def &
+```
+
+
+
+
   
 - SPEF extraction
 
-- GDS II
+  After routing has been completed interconnect parasitics can be extracted to perform sign-off post-route STA analysis. The parasitics are extracted into a SPEF file using SPEF-Extractor.
+
+spef file will be generated after run_routing command at location $OPENLANE_ROOT/designs/picorv32a/runs/12-08_20-54/results/routing/picorv32a.spef
+
+
+
+
+- GDSII
+
+  GDSII files are usually the final output product of the IC design cycle and are given to silicon foundries for IC fabrication.It is a binary file format representing planar geometric shapes, text labels, and other information about the layout in hierarchical form.
+
+To generate GDSII file:
+```
+run_magic
+```
+
 
 
 
@@ -334,9 +426,9 @@ run_cts
 
 # Acknowledgements 
 
+- [Kunal Ghosh](https://github.com/kunalg123)
 - [The OpenROAD Project](https://github.com/The-OpenROAD-Project/OpenLane)
 - [Nickson Jose](https://github.com/nickson-jose/vsdstdcelldesign)
-- [Kunal Ghosh](https://github.com/kunalg123)
   
 
 
